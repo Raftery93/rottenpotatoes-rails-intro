@@ -14,7 +14,7 @@ class MoviesController < ApplicationController
     
     
     sort = params[:sort]
-    
+    @all_ratings = Movie.pluck(:rating).uniq
     if sort == 'title'
       @movies = Movie.order("title ASC")
 
