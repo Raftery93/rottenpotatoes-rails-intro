@@ -15,6 +15,7 @@ class MoviesController < ApplicationController
     
     @sort = params[:sort]
     @all_ratings = Movie.pluck(:rating).uniq
+    
     if @sort == 'title'
       @movies = Movie.order("title ASC")
 
@@ -23,6 +24,8 @@ class MoviesController < ApplicationController
     else
       @movies = Movie.all
     end
+    params[:ratings].nil? ? @t_param = @all_ratings : @t_param = params[:ratings].keys
+    @movies = Movie.where(rating: @t_param).order(@sort)
   end
 
   def new
