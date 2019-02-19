@@ -13,12 +13,12 @@ class MoviesController < ApplicationController
   def index
     
     
-    sort = params[:sort]
+    @sort = params[:sort]
     @all_ratings = Movie.pluck(:rating).uniq
-    if sort == 'title'
+    if @sort == 'title'
       @movies = Movie.order("title ASC")
 
-    elsif sort == 'release_date'
+    elsif @sort == 'release_date'
       @movies = Movie.order("release_date ASC");
     else
       @movies = Movie.all
